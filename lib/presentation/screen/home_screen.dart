@@ -1,4 +1,4 @@
-import 'package:aisight_app/presentation/screen/camera_screen.dart';
+import 'package:aisight_app/presentation/screen/image_screen.dart';
 import 'package:aisight_app/presentation/screen/dashboard_screen.dart';
 import 'package:aisight_app/presentation/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,18 +23,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           );
         },
       ),
-      title: Image.asset('assets/images/logo_jaunnt.png', height: 45),
-      centerTitle: true,
       actions: [
-        IconButton(
-          icon: const Icon(
-            Icons.filter_alt,
-            color: Color(0xff00425A),
-          ),
-          onPressed: () {
-            // TODO: Implement filter functionality
-          },
-        ),
         IconButton(
           icon: const Icon(
             Icons.notifications_rounded,
@@ -59,7 +48,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentTab = 0;
   final List<Widget> screeens = [
-    const CameraScreen(),
+    const ImageScreen(),
     const DashboardScreen(),
     const ProfileScreen()
   ];
@@ -107,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SizedBox(
           height: 60,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -116,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     minWidth: 30,
                     onPressed: () {
                       setState(() {
-                        currentScrren = const DashboardScreen();
+                        currentScrren = const ProfileScreen();
                         currentTab = 0;
                       });
                     },
@@ -124,15 +113,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          currentTab == 0
-                              ? Icons.home_rounded
-                              : Icons.home_outlined,
+                          Icons.dashboard,
                           color: currentTab == 0
                               ? const Color.fromARGB(255, 5, 74, 153)
                               : const Color(0xff3D3D3D),
                         ),
                         Text(
-                          'Camera',
+                          'Dashboard',
                           style: TextStyle(
                               color: currentTab == 0
                                   ? const Color.fromARGB(255, 5, 74, 153)
@@ -148,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     minWidth: 30,
                     onPressed: () {
                       setState(() {
-                        currentScrren = const ProfileScreen();
+                        currentScrren = const ImageScreen();
                         currentTab = 1;
                       });
                     },
@@ -156,15 +143,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          currentTab == 1
-                              ? Icons.explore
-                              : Icons.explore_outlined,
+                          Icons.camera_alt,
                           color: currentTab == 1
                               ? const Color.fromARGB(255, 5, 74, 153)
                               : const Color(0xff3D3D3D),
                         ),
                         Text(
-                          'Dashboard',
+                          'Camera',
                           style: TextStyle(
                               color: currentTab == 1
                                   ? const Color.fromARGB(255, 5, 74, 153)
@@ -181,24 +166,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       setState(() {
                         currentScrren = const ProfileScreen();
-                        currentTab = 4;
+                        currentTab = 2;
                       });
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          currentTab == 4
-                              ? Icons.account_circle
-                              : Icons.account_circle_outlined,
-                          color: currentTab == 4
+                          Icons.account_circle,
+                          color: currentTab == 2
                               ? const Color.fromARGB(255, 5, 74, 153)
                               : const Color(0xff3D3D3D),
                         ),
                         Text(
                           'Profile',
                           style: TextStyle(
-                              color: currentTab == 4
+                              color: currentTab == 2
                                   ? const Color.fromARGB(255, 5, 74, 153)
                                   : const Color(0xff3D3D3D)),
                         )
