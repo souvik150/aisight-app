@@ -1,4 +1,5 @@
 import "dart:io";
+import 'package:aisight_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 import '../components/image_input.dart';
 
@@ -19,10 +20,18 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      appBar: AppBar(
+        title: const Text('Camera'),
+        backgroundColor: appBarColor,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          top: 50,
+          left: 30,
+          right: 30,
+        ),
         child: Column(
           children: [
-            Text("Camera Screen"),
             ImageInput(_selectImage),
           ],
         ),

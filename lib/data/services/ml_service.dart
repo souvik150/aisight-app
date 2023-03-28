@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class AuthService {
-  final _baseurl = "https://ai-sight.onrender.com";
+class MlService {
+  final _baseurl = "";
 
   Future login(String phoneNumber, String password) async {
     final url = Uri.parse('$_baseurl/signup/user');

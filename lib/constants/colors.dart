@@ -1,29 +1,17 @@
 import 'package:flutter/material.dart';
 
-Color themeColor = const Color(0xFFD8E9EB);
-MaterialColor themeColors = MaterialColor(0xFFD8E9EB, {
-  50: themeColor.withOpacity(0.1),
-  100: themeColor.withOpacity(0.2),
-  200: themeColor.withOpacity(0.3),
-  300: themeColor.withOpacity(0.4),
-  400: themeColor.withOpacity(0.5),
-  500: themeColor.withOpacity(0.6),
-  600: themeColor.withOpacity(0.7),
-  700: themeColor.withOpacity(0.8),
-  800: themeColor.withOpacity(0.9),
-  900: themeColor.withOpacity(1.0),
-});
+const primaryColor = Color(0xffD5C5F6);
+const bgColor = Color(0xffF5F0FF);
 
-Color primaryColor = Color.fromARGB(255, 35, 29, 76);
-MaterialColor primaryTextColor = MaterialColor(0xFFD8E9EB, {
-  50: themeColor.withOpacity(0.1),
-  100: themeColor.withOpacity(0.2),
-  200: themeColor.withOpacity(0.3),
-  300: themeColor.withOpacity(0.4),
-  400: themeColor.withOpacity(0.5),
-  500: themeColor.withOpacity(0.6),
-  600: themeColor.withOpacity(0.7),
-  700: themeColor.withOpacity(0.8),
-  800: themeColor.withOpacity(0.9),
-  900: themeColor.withOpacity(1.0),
-});
+const appBarColor = Color(0xff5E42B2);
+
+const headingColor = Color(0xff5E42B2);
+const textColor = Color(0xff280A33);
+
+const primaryIconColor = Color(0xffFFFFFF);
+const hoverIconColor = Color(0xffD5C5F6);
+
+const buttonTextColor = Color(0xffFFFFFF);
+const buttonBgColor = Color(0xff5E42B2);
+
+const containerColor = Color(0xffD5C5F6);

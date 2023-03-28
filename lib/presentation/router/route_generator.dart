@@ -1,6 +1,7 @@
 import 'package:aisight_app/presentation/screen/camera_screen.dart';
 import 'package:aisight_app/presentation/screen/gallery_screen.dart';
 import 'package:aisight_app/presentation/screen/image_screen.dart';
+import 'package:aisight_app/presentation/screen/login_screen.dart';
 import 'package:aisight_app/presentation/screen/profile_screen.dart';
 import 'package:aisight_app/presentation/screen/signup_screen.dart';
 import 'package:aisight_app/presentation/screen/welcome_screen.dart';
@@ -9,13 +10,13 @@ import 'package:aisight_app/presentation/screen/home_screen.dart';
 
 class RouteGenerator extends NavigatorObserver {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
-
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => const WelcomeScreen());
       case '/signup':
         return MaterialPageRoute(builder: (_) => const SignupScreen());
+      case '/login':
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       case '/home':
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case '/image':

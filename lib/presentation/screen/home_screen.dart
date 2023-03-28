@@ -1,7 +1,9 @@
+import 'package:aisight_app/constants/colors.dart';
 import 'package:aisight_app/presentation/screen/image_screen.dart';
 import 'package:aisight_app/presentation/screen/dashboard_screen.dart';
 import 'package:aisight_app/presentation/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({super.key});
@@ -12,28 +14,17 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color(0xffADC8CE),
+      backgroundColor: appBarColor,
       leading: Builder(
         builder: (BuildContext context) {
           return IconButton(
-            icon: const Icon(Icons.menu, color: Color(0xff00425A)),
+            icon: const Icon(Icons.menu, color: primaryIconColor),
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },
           );
         },
       ),
-      actions: [
-        IconButton(
-          icon: const Icon(
-            Icons.notifications_rounded,
-            color: Color(0xff00425A),
-          ),
-          onPressed: () {
-            // TODO: Implement notifications functionality
-          },
-        ),
-      ],
     );
   }
 }
@@ -64,24 +55,46 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color(0xffADC8CE),
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                color: appBarColor,
               ),
-              child: Text('Menu'),
+              child: Column(
+                children: [
+                  const SizedBox(height: 10),
+                  const Text(
+                    "AISight",
+                    style: TextStyle(color: primaryColor, fontSize: 30),
+                  ),
+                  const SizedBox(height: 10),
+                  SvgPicture.asset(
+                    'assets/logo.svg',
+                    height: 70,
+                    width: 70,
+                  ),
+                ],
+              ),
             ),
             ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home'),
+              leading: const Icon(Icons.home_outlined, color: textColor),
+              title: const Text('Home', style: TextStyle(color: textColor)),
               onTap: () {
-                // TODO: Navigate to home screen
+                Navigator.of(context).pushNamed('/home');
               },
             ),
             ListTile(
-              leading: const Icon(Icons.account_circle),
-              title: const Text('Profile'),
+              leading:
+                  const Icon(Icons.account_circle_outlined, color: textColor),
+              title: const Text('Profile', style: TextStyle(color: textColor)),
               onTap: () {
-                // TODO: Navigate to profile screen
+                Navigator.of(context).pushNamed('/home');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout_outlined, color: textColor),
+              title: const Text('Logout', style: TextStyle(color: textColor)),
+              onTap: () {
+                Navigator.of(context).pushNamed('/');
               },
             ),
             // Add more menu items as needed
@@ -93,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: currentScrren,
       ),
       bottomNavigationBar: BottomAppBar(
+        color: appBarColor,
         child: SizedBox(
           height: 60,
           child: Row(
@@ -105,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     minWidth: 30,
                     onPressed: () {
                       setState(() {
-                        currentScrren = const ProfileScreen();
+                        currentScrren = const DashboardScreen();
                         currentTab = 0;
                       });
                     },
@@ -115,15 +129,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         Icon(
                           Icons.dashboard,
                           color: currentTab == 0
-                              ? const Color.fromARGB(255, 5, 74, 153)
-                              : const Color(0xff3D3D3D),
+                              ? primaryIconColor
+                              : hoverIconColor,
                         ),
                         Text(
                           'Dashboard',
                           style: TextStyle(
-                              color: currentTab == 0
-                                  ? const Color.fromARGB(255, 5, 74, 153)
-                                  : const Color(0xff3D3D3D)),
+                            color: currentTab == 0
+                                ? primaryIconColor
+                                : hoverIconColor,
+                          ),
                         )
                       ],
                     ),
@@ -143,17 +158,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.camera_alt,
+                          Icons.document_scanner_rounded,
                           color: currentTab == 1
-                              ? const Color.fromARGB(255, 5, 74, 153)
-                              : const Color(0xff3D3D3D),
+                              ? primaryIconColor
+                              : hoverIconColor,
                         ),
                         Text(
-                          'Camera',
+                          'Image',
                           style: TextStyle(
                               color: currentTab == 1
-                                  ? const Color.fromARGB(255, 5, 74, 153)
-                                  : const Color(0xff3D3D3D)),
+                                  ? primaryIconColor
+                                  : hoverIconColor),
                         )
                       ],
                     ),
@@ -175,15 +190,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         Icon(
                           Icons.account_circle,
                           color: currentTab == 2
-                              ? const Color.fromARGB(255, 5, 74, 153)
-                              : const Color(0xff3D3D3D),
+                              ? primaryIconColor
+                              : hoverIconColor,
                         ),
                         Text(
                           'Profile',
                           style: TextStyle(
                               color: currentTab == 2
-                                  ? const Color.fromARGB(255, 5, 74, 153)
-                                  : const Color(0xff3D3D3D)),
+                                  ? primaryIconColor
+                                  : hoverIconColor),
                         )
                       ],
                     ),

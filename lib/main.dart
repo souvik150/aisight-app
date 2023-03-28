@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'AI Sight',
       theme: ThemeData(
-        scaffoldBackgroundColor: themeColor,
+        scaffoldBackgroundColor: bgColor,
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/home',

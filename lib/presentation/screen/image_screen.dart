@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:aisight_app/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import "package:image_picker/image_picker.dart";
 
 class ImageScreen extends StatefulWidget {
@@ -17,39 +19,70 @@ class _ImageScreenState extends State<ImageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                  color: Theme.of(context).primaryColor))
-          : SingleChildScrollView(
+      body: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Row(
+          children: [
+            Expanded(
               child: Column(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/gallery');
-                  },
-                  child: const Text(
-                    "Gallery Screen",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                children: [
+                  SvgPicture.asset("assets/imgHero.svg", height: 350),
+                  Expanded(
+                    flex: 1,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/camera');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: buttonBgColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          child: const Text(
+                            "Scan",
+                            style: TextStyle(
+                                color: buttonTextColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          )),
+                    ),
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/camera');
-                  },
-                  child: const Text(
-                    "Camera Screen",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                  const SizedBox(
+                    height: 30,
                   ),
-                )
-              ],
-            )),
+                  Expanded(
+                    flex: 1,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/gallery');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: buttonBgColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: const Text(
+                          "Upload from Gallery",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
