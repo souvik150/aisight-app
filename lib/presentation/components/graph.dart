@@ -59,7 +59,7 @@ class _GraphState extends State<Graph> {
             children: const <Widget>[
               Indicator(
                 color: AppColors.contentColorBlue,
-                text: 'First',
+                text: 'Cataract',
                 isSquare: true,
               ),
               SizedBox(
@@ -67,7 +67,7 @@ class _GraphState extends State<Graph> {
               ),
               Indicator(
                 color: AppColors.contentColorYellow,
-                text: 'Second',
+                text: 'Diabatic',
                 isSquare: true,
               ),
               SizedBox(
@@ -75,7 +75,7 @@ class _GraphState extends State<Graph> {
               ),
               Indicator(
                 color: AppColors.contentColorPurple,
-                text: 'Third',
+                text: 'Hypertension',
                 isSquare: true,
               ),
               SizedBox(

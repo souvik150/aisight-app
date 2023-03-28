@@ -28,7 +28,7 @@ class AnalysisResultState extends State {
           right: 30,
         ),
         child: Column(
-          children: [
+          children: const [
             Graph(),
           ],
         ),
