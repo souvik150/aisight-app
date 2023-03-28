@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _authService = AuthService();
 
   late String _buttonText;
-  late String _phoneNumber;
+  late String _email;
   late String _password;
 
   bool _obscureText = true;
@@ -28,13 +28,13 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     _buttonText = 'Login';
-    _phoneNumber = '';
+    _email = '';
     _password = '';
   }
 
-  void _handlePhoneNumberChanged(String value) {
+  void _handleEmailNumberChanged(String value) {
     setState(() {
-      _phoneNumber = value;
+      _email = value;
     });
   }
 
@@ -49,29 +49,18 @@ class _LoginScreenState extends State<LoginScreen> {
       _buttonText = "Logging you in!";
     });
 
-    final response = await _authService.login(_phoneNumber, _password);
+    final response = await _authService.login(_email, _password);
 
-    var token = json.decode(response.body)['token']['accessToken'];
-    HelperFunctions.saveTokenSF(token);
     HelperFunctions.saveUserLoggedInStatus(true);
+    HelperFunctions.saveUserEmailSF(_email);
 
-    print(response.statusCode);
-
-    if (response.statusCode == 200) {
-      Navigator.of(context).pushNamed('/home');
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Some error occurred."),
-        ),
-      );
-    }
+    Navigator.of(context).pushNamed('/home');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            backgroundColor: appBarColor,
+      backgroundColor: appBarColor,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +69,6 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               decoration: const BoxDecoration(
                 color: Colors.white,
-            
               ),
               child: Column(
                 children: [
@@ -93,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         const SizedBox(
-                          height: 25,
+                          height: 45,
                         ),
                         SvgPicture.asset(
                           "assets/hero.svg",
@@ -116,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             const SizedBox(
-              height: 80,
+              height: 20,
             ),
             Container(
               child: Padding(
@@ -132,30 +120,68 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 20,
                     ),
+                    const Text(
+                      "Welcome Back!",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                        color: bgColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     TextField(
+                      style: const TextStyle(
+                        color: Colors.white, // set text color to white
+                      ),
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 15.0),
+                          horizontal: 20.0,
+                          vertical: 15.0,
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                            color: Colors.white, // set border color to white
+                          ),
                         ),
-                        hintText: 'Phone Number',
-                        hintStyle: const TextStyle(
-                          color: bgColor,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                            color: Colors.white, // set border color to white
+                          ),
+                        ),
+                        hintText: 'Email',
+                        hintStyle: TextStyle(
+                          color: Colors.white.withOpacity(
+                              0.5), // set hint text color to white with opacity
                           fontWeight: FontWeight.w200,
                         ),
                       ),
-                      onChanged: _handlePhoneNumberChanged,
+                      onChanged: _handleEmailNumberChanged,
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     TextField(
+                      style: const TextStyle(
+                        color: Colors.white, // set text color to white
+                      ),
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 15.0),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                            color: Colors.white, // set border color to white
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                            color: Colors.white, // set border color to white
+                          ),
                         ),
                         hintText: 'Password',
                         hintStyle: const TextStyle(
@@ -185,9 +211,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text(
                       "New to AI Sight?",
                       style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                          color: bgColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: bgColor,
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -196,44 +223,42 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/login');
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(300, 50),
-                padding: const EdgeInsets.symmetric(
-                      horizontal: 80, vertical: 15),
-                backgroundColor: bgColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: const Text(
-                "Login",
-                style: TextStyle(color: appBarColor, fontSize: 18),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-                      ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/login');
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(300, 50),
-                padding: const EdgeInsets.symmetric(
-                      horizontal: 80, vertical: 15),
-                backgroundColor: bgColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: const Text(
-                "Login",
-                style: TextStyle(color: appBarColor, fontSize: 18),
-              ),
-            ),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/signup');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(400, 50),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 80, vertical: 15),
+                            backgroundColor: bgColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          child: const Text(
+                            "Signup",
+                            style: TextStyle(color: appBarColor, fontSize: 18),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          onPressed: _handleLoginPressed,
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(400, 50),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 80, vertical: 15),
+                            backgroundColor: bgColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          child: Text(
+                            _buttonText,
+                            style: TextStyle(color: appBarColor, fontSize: 18),
+                          ),
+                        ),
                       ],
                     )
                   ],

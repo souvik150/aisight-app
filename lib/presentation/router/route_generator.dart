@@ -1,3 +1,4 @@
+import 'package:aisight_app/presentation/screen/analysis_result.dart';
 import 'package:aisight_app/presentation/screen/camera_screen.dart';
 import 'package:aisight_app/presentation/screen/gallery_screen.dart';
 import 'package:aisight_app/presentation/screen/image_screen.dart';
@@ -27,6 +28,8 @@ class RouteGenerator extends NavigatorObserver {
         return MaterialPageRoute(builder: (_) => const GalleryScreen());
       case '/profile':
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
+      case '/analysis':
+        return MaterialPageRoute(builder: (_) => AnalysisResult());
 
       default:
         return _errorRoute();

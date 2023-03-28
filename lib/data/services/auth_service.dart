@@ -4,16 +4,17 @@ import 'package:http/http.dart' as http;
 class AuthService {
   final _baseurl = "https://ai-sight.onrender.com";
 
-  Future login(String phoneNumber, String password) async {
-    final url = Uri.parse('$_baseurl/signup/user');
+  Future login(String email, String password) async {
+    final url = Uri.parse('$_baseurl/login');
     try {
       Map<String, String> headers = {"Content-type": "application/json"};
+      print(email +" "+password);
 
       final response = await http
           .post(url,
               headers: headers,
               body: json.encode({
-                'phoneNumber': phoneNumber,
+                'email': email,
                 'password': password,
               }))
           .then((response) {

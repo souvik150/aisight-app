@@ -1,76 +1,67 @@
 class User {
-  String? id;
-  String? fullName;
-  String? password;
+  String? name;
   String? email;
-  String? phoneNumber;
-  String? token;
-  String? userRole;
-  String? refreshToken;
-  String? createdTime;
-  String? updatedTime;
-  String? userId;
-  bool? verifyUser;
-  String? verifyOtp;
-  bool? active;
-  String? bio;
-  String? profilePhoto;
+  String? password;
+  String? phoneNum;
+  String? height;
+  String? weight;
+  List<UserPictures>? userPictures;
 
   User(
-      {required this.id,
-      required this.fullName,
-      required this.password,
-      required this.email,
-      required this.phoneNumber,
-      required this.token,
-      required this.userRole,
-      required this.refreshToken,
-      required this.createdTime,
-      required this.updatedTime,
-      required this.userId,
-      required this.verifyUser,
-      required this.verifyOtp,
-      required this.active,
-      required this.bio,
-      required this.profilePhoto});
+      {this.name,
+        this.email,
+        this.password,
+        this.phoneNum,
+        this.height,
+        this.weight,
+        this.userPictures});
 
   User.fromJson(Map<String, dynamic> json) {
-    id = json['Id'];
-    fullName = json['fullName'];
-    password = json['password'];
+    name = json['name'];
     email = json['email'];
-    phoneNumber = json['phoneNumber'];
-    token = json['token'];
-    userRole = json['userRole'];
-    refreshToken = json['refreshToken'];
-    createdTime = json['createdTime'];
-    updatedTime = json['updatedTime'];
-    userId = json['userId'];
-    verifyUser = json['verifyUser'];
-    verifyOtp = json['verifyOtp'];
-    active = json['active'];
-    bio = json['bio'];
-    profilePhoto = json['profilePhoto'];
+    password = json['password'];
+    phoneNum = json['phone_num'];
+    height = json['height'];
+    weight = json['weight'];
+    if (json['user-pictures'] != null) {
+      userPictures = <UserPictures>[];
+      json['user-pictures'].forEach((v) {
+        userPictures!.add(new UserPictures.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['Id'] = id;
-    data['fullName'] = fullName;
-    data['password'] = password;
-    data['email'] = email;
-    data['phoneNumber'] = phoneNumber;
-    data['token'] = token;
-    data['userRole'] = userRole;
-    data['refreshToken'] = refreshToken;
-    data['createdTime'] = createdTime;
-    data['updatedTime'] = updatedTime;
-    data['userId'] = userId;
-    data['verifyUser'] = verifyUser;
-    data['verifyOtp'] = verifyOtp;
-    data['active'] = active;
-    data['bio'] = bio;
-    data['profilePhoto'] = profilePhoto;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['password'] = this.password;
+    data['phone_num'] = this.phoneNum;
+    data['height'] = this.height;
+    data['weight'] = this.weight;
+    if (this.userPictures != null) {
+      data['user-pictures'] =
+          this.userPictures!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class UserPictures {
+  String? pictureLink;
+  String? dateAndTime;
+
+  UserPictures({this.pictureLink, this.dateAndTime});
+
+  UserPictures.fromJson(Map<String, dynamic> json) {
+    pictureLink = json['picture link'];
+    dateAndTime = json['date and time'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['picture link'] = this.pictureLink;
+    data['date and time'] = this.dateAndTime;
     return data;
   }
 }

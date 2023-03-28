@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../constants/colors.dart';
+
 class ImageInput extends StatefulWidget {
   final Function(File pickedImage) onImagePicked;
 
@@ -32,17 +34,18 @@ class _ImageInputState extends State<ImageInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: <Widget>[
         Container(
-          width: 150,
-          height: 150,
+          width: 350,
+          height: 350,
           decoration: BoxDecoration(
             border: Border.all(
               width: 1,
               color: Colors.grey,
             ),
           ),
+          alignment: Alignment.center,
           child: _imageFile != null
               ? Image.file(
                   _imageFile!,
@@ -55,17 +58,55 @@ class _ImageInputState extends State<ImageInput> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-          alignment: Alignment.center,
         ),
-        const SizedBox(
-          width: 10,
-        ),
-        Expanded(
-          child: TextButton.icon(
-            icon: const Icon(Icons.camera),
-            label: const Text('Take Picture'),
-            onPressed: _getImage,
-          ),
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 50
+              ),
+              child: ElevatedButton(
+                onPressed: _getImage,
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(400, 50),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 80, vertical: 15),
+                  backgroundColor: appBarColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  "Take Image",
+                  style: TextStyle(color: bgColor, fontSize: 18),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 30
+              ),
+              child: ElevatedButton(
+                onPressed: () => {
+                  Navigator.of(context).pushNamed('/analysis')
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(400, 50),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 80, vertical: 15),
+                  backgroundColor: appBarColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  "Send Image",
+                  style: TextStyle(color: bgColor, fontSize: 18),
+
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
